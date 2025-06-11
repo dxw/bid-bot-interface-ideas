@@ -1165,36 +1165,36 @@
       }
 
       #botbrand {
-		  animation: color-change 3s infinite;
-		  font-weight: 700;
-		}
+      animation: color-change 3s infinite;
+      font-weight: 700;
+    }
 
-		@keyframes color-change {
-		    /* dxw PINK */
-		    0% {
-		      color: #ffb1b9;
-		    }
-		    /* dxw ORANGE */
-		    20% {
-		      color: #ffa489;
-		    }
-		    /* dxw YELLOW */
-		    40% {
-		      color: #fcd672;
-		    }
-		    /* dxw GREEN */
-		    60% {
-		      color: #80c7bc;
-		    }
-		    /* dxw BLUE */
-		    80% {
-		      color: #73c3d5;
-		    }
-		    /* dxw PURPLE */
-		    100% {
-		      color: #a7a4df;
-		    }
-		}
+    @keyframes color-change {
+        /* dxw PINK */
+        0% {
+          color: #ffb1b9;
+        }
+        /* dxw ORANGE */
+        20% {
+          color: #ffa489;
+        }
+        /* dxw YELLOW */
+        40% {
+          color: #fcd672;
+        }
+        /* dxw GREEN */
+        60% {
+          color: #80c7bc;
+        }
+        /* dxw BLUE */
+        80% {
+          color: #73c3d5;
+        }
+        /* dxw PURPLE */
+        100% {
+          color: #a7a4df;
+        }
+    }
     </style>
   </head>
   <body class="home wp-singular page-template-default page page-id-3 wp-theme-govpress-product-themetemplates wp-child-theme-dxw-child-themetemplates js-enabled">
@@ -1218,6 +1218,9 @@
           <div class="basis-1/4" style="position: -webkit-sticky; /* Safari */ position: sticky; top: 30px; height: 300px;">
             <h2 class="pb-4 has-poppins-font-family"><span style="font-weight: 400;">Bid</span>Bot</h2>
             <p>
+              <a href="#question">AI Model</a>
+            </p>
+            <p>
               <a href="#question">Question</a>
             </p>
             <p>
@@ -1227,19 +1230,26 @@
               <a href="#answer">Answer</a>
             </p>
             <br>
-            <form class="form" action="./answer.html#answer" method="post">
-              <input type="submit" value="Generate answer">
-            </form>
+            <input type="submit" value="Generate answer">
           </div>
-          <div class="basis-3/4">
+          <div class="basis-3/4"> 
+            <h2 class="pb-4 has-poppins-font-family" id="question">AI model</h2>
+            <label for="cars" style="font-weight: 400;">Choose a AI model:</label>
+            <select name="cars" id="cars">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="opel">Opel</option>
+              <option value="audi">Audi</option>
+            </select>
+            <br>
             <h2 class="pb-4 has-poppins-font-family" id="question">Question</h2>
             <textarea id="w3review" name="w3review" rows="2">
 
             </textarea>
 
-                	<h2 class="pb-4 has-poppins-font-family" id="prompt">Prompt</h2>
+                  <h2 class="pb-4 has-poppins-font-family" id="prompt">Prompt</h2>
                   <p class="has-poppins-font-family">Instructions about what makes a good bid answer. There is an example to get you started.</p>
-      			<textarea id="w3review" name="w3review" rows="10">
+            <textarea id="w3review" name="w3review" rows="10">
 You are an Al assistant working for dxw to write sales bids for UK government contracts.
 Your task is to write answers to bid questions based on dxw's previous work.
 You will be provided with a bid question, and some examples of dxw's previous work. All of this information is in markdown format.
@@ -1250,10 +1260,26 @@ previous work.
 Include at the end a list of the previous work files that were used to write the answer.   
             </textarea>
             <h2 class="pb-4 has-poppins-font-family" id="answer">Answer generated</h2>
-            <p style="width: 100%; border: 3px solid #243746; margin-bottom: 20px; padding: 20px;">Waiting for a question and prompt</p>
-            <p>
-              <a href="prompt">0 files</a> answer generated from
+            <p style="width: 100%; border: 3px solid #243746; margin-bottom: 20px; padding: 20px;">
+              dxw delivered DfE’s National Pupil Database through discovery, alpha and beta phases following GDS standards, successfully passing both alpha and beta service assessments. Our multidisciplinary team conducted user research-led delivery in iterative two-week cycles, prototyping and testing with users throughout. 
+              <br><br>
+              We adopted outcomes-based roadmaps, worked openly with stakeholders through
+              regular checkpoints, and used co-design sessions to uncover user needs and validate design decisions. The service was built using GOV.UK Design System patterns and met WCAG 2.1 AA accessibility standards. 
+              <br><br>
+              Through continuous user research and refinement of prototypes at increasing fidelity levels, we developed an accessible database that successfully met user needsand government requirements, demonstrating our proven capability to deliver services that pass rigorous GDS service
+              assessments
+              <br><br>
+              <a href="prompt">Copy text</a>
             </p>
+            <p>
+              2 files answer generated from:
+            </p>
+                <ul>
+                  <li><a href="prompt">q08_DfE_Regions_Send_Q3_-</a></li>
+                </ul>
+                <ul>
+                  <li><a href="prompt">Social_Value__ensure_successful_delivery_of_digital_products_and_services_.md</a></li>
+                </ul>
           </div>
         </div>
       </div>
