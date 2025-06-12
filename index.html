@@ -1423,9 +1423,7 @@ Include at the end a list of the previous work files that were used to write the
       const data = await res.json();
 
       if (data.status === "okay") {
-        outputPara.innerHTML = window.marked
-          ? marked(data.answer)
-          : `<pre style="white-space: pre-wrap;">${data.answer}</pre>`;
+        outputPara.textContent = data.answer;
       } else {
         outputPara.textContent = "❌ " + data.error;
       }
