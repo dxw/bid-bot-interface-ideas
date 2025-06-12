@@ -1230,7 +1230,7 @@
               <a href="#answer">Answer</a>
             </p>
             <br>
-            <input type="submit" value="Generate answer">
+            <input id="generate-btn" type="submit" value="Generate answer">
           </div>
           <div class="basis-3/4"> 
             <h2 class="pb-4 has-poppins-font-family" id="question">AI model</h2>
@@ -1243,13 +1243,13 @@
             </select>
             <br>
             <h2 class="pb-4 has-poppins-font-family" id="question">Question</h2>
-            <textarea id="w3review" name="w3review" rows="2">
+            <textarea id="question-input" name="w3review" rows="2">
 
             </textarea>
 
                   <h2 class="pb-4 has-poppins-font-family" id="prompt">Prompt</h2>
                   <p class="has-poppins-font-family">Instructions about what makes a good bid answer. There is an example to get you started.</p>
-            <textarea id="w3review" name="w3review" rows="10">
+            <textarea id="prompt-input" name="w3review" rows="10">
 You are an Al assistant working for dxw to write sales bids for UK government contracts.
 Your task is to write answers to bid questions based on dxw's previous work.
 You will be provided with a bid question, and some examples of dxw's previous work. All of this information is in markdown format.
@@ -1260,7 +1260,7 @@ previous work.
 Include at the end a list of the previous work files that were used to write the answer.   
             </textarea>
             <h2 class="pb-4 has-poppins-font-family" id="answer">Answer generated</h2>
-            <p style="width: 100%; border: 3px solid #243746; margin-bottom: 20px; padding: 20px;">
+            <p id="answer-output" style="width: 100%; border: 3px solid #243746; margin-bottom: 20px; padding: 20px;">
               dxw delivered DfE’s National Pupil Database through discovery, alpha and beta phases following GDS standards, successfully passing both alpha and beta service assessments. Our multidisciplinary team conducted user research-led delivery in iterative two-week cycles, prototyping and testing with users throughout. 
               <br><br>
               We adopted outcomes-based roadmaps, worked openly with stakeholders through
@@ -1389,5 +1389,54 @@ Include at the end a list of the previous work files that were used to write the
       }
     </style>
     <script type="text/javascript" src="./generate-bid-answers-v1_files/main.js" id="child-main-js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+  const btn        = document.getElementById("generate-btn");
+  const questionEl = document.getElementById("question-input");
+  const outputPara = document.getElementById("answer-output");
+
+  if (!btn || !questionEl || !outputPara) {
+    console.error("Missing element:", { btn, questionEl, outputPara });
+    return;
+  }
+
+  const apiBase = `${location.protocol}//${location.hostname}:4567`;
+
+  btn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const q = questionEl.value.trim();
+    if (!q) {
+      outputPara.textContent = "⚠️ Please enter a question.";
+      return;
+    }
+
+    btn.disabled          = true;
+    outputPara.textContent = "Loading…";
+
+    try {
+      const res  = await fetch(`${apiBase}/generate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q, files: [] })
+      });
+      const data = await res.json();
+
+      if (data.status === "okay") {
+        outputPara.innerHTML = window.marked
+          ? marked(data.answer)
+          : `<pre style="white-space: pre-wrap;">${data.answer}</pre>`;
+      } else {
+        outputPara.textContent = "❌ " + data.error;
+      }
+    } catch (err) {
+      console.error(err);
+      outputPara.textContent = "⚠️ Fetch error: " + err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+});
+</script>
   </body>
 </html>
